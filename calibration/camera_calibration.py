@@ -22,7 +22,6 @@ if not CHECK_DIR:
 else:
     print(f'"{calib_data_path}" Directory already Exists.')
 
-# prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
 obj_3D = np.zeros((CHESS_BOARD_DIM[0] * CHESS_BOARD_DIM[1], 3), np.float32)
 
 obj_3D[:, :2] = np.mgrid[0 : CHESS_BOARD_DIM[0], 0 : CHESS_BOARD_DIM[1]].T.reshape(
@@ -31,9 +30,8 @@ obj_3D[:, :2] = np.mgrid[0 : CHESS_BOARD_DIM[0], 0 : CHESS_BOARD_DIM[1]].T.resha
 obj_3D *= SQUARE_SIZE
 print(obj_3D)
 
-# Arrays to store object points and image points from all the images.
-obj_points_3D = []  # 3d point in real world space
-img_points_2D = []  # 2d points in image plane.
+obj_points_3D = []
+img_points_2D = []
 
 image_dir_path = "images"
 
