@@ -5,11 +5,9 @@ CHESS_BOARD_DIM = (9, 6)
 
 n = 0  # image_counter
 
-# checking if  images dir is existed not, if not then create images directory
 image_dir_path = "images"
 
 CHECK_DIR = os.path.isdir(image_dir_path)
-# if directory does not exist create
 if not CHECK_DIR:
     os.makedirs(image_dir_path)
     print(f'"{image_dir_path}" Directory is created')
@@ -36,7 +34,6 @@ while True:
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
     image, board_detected = detect_checker_board(frame, gray, criteria, CHESS_BOARD_DIM)
-    # print(ret)
     cv.putText(
         frame,
         f"saved_img : {n}",
@@ -56,11 +53,10 @@ while True:
     if key == ord("q"):
         break
     if key == ord("s") and board_detected == True:
-        # storing the checkerboard image
         cv.imwrite(f"{image_dir_path}/image{n}.png", copyFrame)
 
         print(f"saved image number {n}")
-        n += 1  # incrementing the image counter
+        n += 1
 cap.release()
 cv.destroyAllWindows()
 

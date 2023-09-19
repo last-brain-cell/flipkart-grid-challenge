@@ -2,11 +2,10 @@ import cv2 as cv
 import os
 import numpy as np
 
-# Checker board size
 CHESS_BOARD_DIM = (9, 6)
 
-# The size of Square in the checker board.
-SQUARE_SIZE = 14  # millimeters
+# size of Square in the checker board.
+SQUARE_SIZE = 14  # mm
 
 # termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -36,14 +35,12 @@ print(obj_3D)
 obj_points_3D = []  # 3d point in real world space
 img_points_2D = []  # 2d points in image plane.
 
-# The images directory path
 image_dir_path = "images"
 
 files = os.listdir(image_dir_path)
 for file in files:
     print(file)
     imagePath = os.path.join(image_dir_path, file)
-    # print(imagePath)
 
     image = cv.imread(imagePath)
 
@@ -51,7 +48,7 @@ for file in files:
         grayScale = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     except:
         continue
-    # Just to bypass the src.empty() assertion error in cv2
+    # Just to bypass the src.empty() assertion error in cv2 - chutiya sa error tha
 
     ret, corners = cv.findChessboardCorners(image, CHESS_BOARD_DIM, None)
     if ret == True:
@@ -62,7 +59,6 @@ for file in files:
         img = cv.drawChessboardCorners(image, CHESS_BOARD_DIM, corners2, ret)
 
 cv.destroyAllWindows()
-# h, w = image.shape[:2]
 ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(
     obj_points_3D, img_points_2D, grayScale.shape[::-1], None, None
 )
@@ -79,7 +75,7 @@ np.savez(
 
 print("-------------------------------------------")
 
-print("loading data stored using numpy savez function\n \n \n")
+# print("loading data stored using numpy savez function\n \n \n")
 
 data = np.load(f"{calib_data_path}/MultiMatrix.npz")
 
