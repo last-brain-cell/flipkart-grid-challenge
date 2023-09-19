@@ -24,7 +24,7 @@ client = mqtt.Client("Boxes", clean_session=False)
 client.on_connect = on_connect
 
 # model
-model = YOLO("models/best.pt")
+model = YOLO("../models/best.pt")
 
 prev_frame_time = 0
 new_frame_time = 0
